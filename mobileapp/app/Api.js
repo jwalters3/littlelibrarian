@@ -139,7 +139,7 @@ Ext.define("App.Api", {
 
     },
 
-    updateBookLocation: function (deviceId, name, lat, lng, successCallback, failureCallback, scope) {
+    updateBookLocation: function (deviceId, lat, lng, successCallback, failureCallback, scope) {
         var postData = { "name": name, "latitude": lat, "longitude": lng};// "elevation": 0 };
         this.doM2X('https://api-m2x.att.com/v2/devices/' + deviceId + '/location', postData, successCallback, failureCallback, scope);
         
@@ -150,21 +150,24 @@ Ext.define("App.Api", {
         this.doM2X('https://api-m2x.att.com/v2/devices/' + deviceId, postData, successCallback, failureCallback, scope);
     },
 
-    checkIn:function(deviceId, name, successCallback, failureCallback,scope) {        
+    checkIn:function(deviceId, name, lat, lng, successCallback, failureCallback,scope) {        
         var postData = { "value": 0 };
-        this.doM2X('https://api-m2x.att.com/v2/devices/' + deviceId + '/streams/status/value', postData, successCallback, failureCallback, scope);
-
         this.updateDevice(deviceId, name, 'Check In', null, null, null);
+        this.updateBookLocation(deviceId, lat, lng, null, null, null);
+        this.doM2X('https://api-m2x.att.com/v2/devices/' + deviceId + '/streams/status/value', postData, successCallback, failureCallback, scope);
 
     },
 
-    checkOut: function (deviceId, name, successCallback, failureCallback,scope) {
-        var url = 'http://api-m2x.att.com/v2/devices/${DEVICE}/streams'
+    checkOut: function (deviceId, name, successCallback, failureCallback,scope) {        
         var postData = { "value": 1 };
         this.doM2X('https://api-m2x.att.com/v2/devices/' + deviceId + '/streams/status/value', postData, successCallback, failureCallback, scope);
         this.updateDevice(deviceId, name, 'Check Out', null, null, null);
     },
 
+    searchISBN:function(book, successCallback, failureCallback, scope) {
+        var url = 'http://isbndb.com/api/v2/json/8ZN7DBWN/books?q=' + book
+        this._get(url, successCallback, failureCallback, scope);
+    },
     
 
     getLibraries: function (lat, lng, successCallback, failureCallback, scope) {

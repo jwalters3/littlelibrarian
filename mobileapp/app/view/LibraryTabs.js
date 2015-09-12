@@ -15,8 +15,7 @@
             xtype: 'librarydetail',
             data: this.config.record
         }, {
-            xtype: 'librarybooks',
-            title: 'Book List'
+            xtype: 'librarybooks'
         }]);
     }
 });

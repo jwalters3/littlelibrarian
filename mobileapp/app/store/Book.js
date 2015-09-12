@@ -1,6 +1,6 @@
 ﻿Ext.define('App.store.Book', {
     extend: 'Ext.data.Store',
-    xtype: 'bookstore',
+    storeId: 'bookstore',
 
     config: {      
         autoLoad: false,

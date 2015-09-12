@@ -43,21 +43,22 @@ Ext.application({
         'Ext.Toast',
         'App.override.LoadMask',
         'App.override.Sheet',
-        'App.view.LibraryDetail',
-        'App.view.LibraryTabs',
-        'App.view.LibraryBooks'
     ],
 
     controllers:[
         'Map',
         'Cordova',
-        'Navigation'
+        'Navigation',
+        'Library'
     ],
 
     views: [
         
         'Map',       
-        'Navigation'
+        'Navigation',
+        'LibraryDetail',
+        'LibraryTabs',
+        'LibraryBooks'
         
     ],
 

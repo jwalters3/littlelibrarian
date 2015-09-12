@@ -60,11 +60,9 @@ Ext.define('App.controller.Map', {
     },
 
     onBookButtonTap: function () {      
-        var nav = this.getController('Navigation');
         this.libraryPanel.hide();
-        nav.push(Ext.create('App.view.LibraryTabs', {
-            record: this.selectedLibrary
-        }));
+        this.getController('Library').showLibrary(this.selectedLibrary);
+        this.selectedLibrary = null;
     },
     onBooksLoaded:function(response) {
         var devices = response.devices;

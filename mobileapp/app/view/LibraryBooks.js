@@ -3,7 +3,9 @@
     xtype: 'librarybooks',
 
     config: {
-        title: 'Details',
+        title: 'Book List',
+        store: 'bookstore',
+
         back: true,
         layout: { type: 'fit' },
         scrollable: true,

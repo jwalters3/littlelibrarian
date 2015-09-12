@@ -61,11 +61,11 @@ Ext.application({
 
     models:
         [
-        
+        'Book'
         ],
     stores:
         [
-           
+           'Book'
         ],
 
     icon: {

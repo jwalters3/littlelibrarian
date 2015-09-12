@@ -5,6 +5,10 @@ Ext.define("App.Util", {
     singleton: true,
     token: null,
 
+    setupDB:function() {
+        this.db = new Firebase('https://sizzling-heat-7569.firebaseio.com/');
+    },
+
     getValue: function (name, defaultValue) {
         var a = localStorage.getItem(name);
         return (a == null) ? defaultValue : a;

@@ -1,2 +1,3 @@
-LFL.sln
-mobileapp/Web.config
+mobileapp/build
+mobileapp/resources/sass/.sass-cache
+mobileapp/bootstrap.*

@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "mobileapp", "http://localhost:58674", "{9D58A85B-DABF-4BC8-9E0B-37C48FB73938}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.1"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_58674"
+		Debug.AspNetCompiler.PhysicalPath = "mobileapp\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58674\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_58674"
+		Release.AspNetCompiler.PhysicalPath = "mobileapp\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58674\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "mobileapp\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{295745C6-4C57-4D2B-B482-B9B7967B7754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{295745C6-4C57-4D2B-B482-B9B7967B7754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{295745C6-4C57-4D2B-B482-B9B7967B7754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{295745C6-4C57-4D2B-B482-B9B7967B7754}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D58A85B-DABF-4BC8-9E0B-37C48FB73938}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D58A85B-DABF-4BC8-9E0B-37C48FB73938}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D58A85B-DABF-4BC8-9E0B-37C48FB73938}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9D58A85B-DABF-4BC8-9E0B-37C48FB73938}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D58A85B-DABF-4BC8-9E0B-37C48FB73938}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		dtLauncher_EnableVSTestHost = 0
+	EndGlobalSection
+EndGlobal

@@ -109,7 +109,8 @@
         "resources/images",
         "resources/icons",
         "resources/startup",
-        "resources/fonts"
+        "resources/fonts",
+        "resource/data.json"
     ],
 
     /**

@@ -59,7 +59,8 @@ Ext.application({
         'Navigation',
         'LibraryDetail',
         'LibraryTabs',
-        'LibraryBooks'
+        'LibraryBooks',
+        'LibraryCheckout'
         
     ],
 

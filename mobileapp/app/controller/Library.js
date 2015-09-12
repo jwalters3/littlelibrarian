@@ -10,11 +10,25 @@
             booksList: {
                 xtype: 'librarybooks',
                 selector: 'librarybooks[action="library"]'
+            },
+            checkoutBtn: {
+                xtype: 'button',
+                selector: 'button[action="checkout"]'
+            },
+            libraryTabs: {
+                xtype: 'librarytabs',
+                selector: 'librarytabs'
             }
         },
         control: {
-            booksList: {
+            libraryTabs: {
                 activate: 'onBooksShow'
+            },
+            booksList: {
+                select: 'onBookTap' 
+            },
+            checkoutBtn: {
+                tap: 'onCheckoutTap'
             }
             //map: {
             //    centerchange: 'onMapPan',
@@ -43,13 +57,42 @@
     onBooksLoaded: function (response) {
         var devices = response.devices;
         var store = Ext.getStore("Book");
+        var query = [];
         store.removeAll();
         for (i = 0; i < devices.length; i++) {
-
             var book = Util.parseM2XBook(devices[i])
+            query.push('isbn:' + book.get('isbn'));
             store.add(book);
         }
-        console.log(store);
+        App.Api.queryBooks(query.join(' OR '), this.onMergeRecords, Ext.emptyFn, this);
+
+    },
+    onBookTap: function (list, record) {
+        var nav = this.getApplication().getController('Navigation');
+        this.selectedRecord = record;
+        nav.push(Ext.create('App.view.LibraryCheckout', { record: record }));
+    },
+    onCheckoutTap: function () {
+        var rec = this.selectedRecord;
+        if (rec) {
+            App.Api.checkOut(rec.get('id'), rec.get('name'), this.onCheckout, Ext.emptyFn, this);
+        }
+    },
+    onMergeRecords: function (response) {
+        var devices = response.items;
+        var store = Ext.getStore("Book");
+        for (i = 0; i < devices.length; i++) {
+            var book = Util.parseGoogleBook(devices[i])
+            if (book) {
+                var storeBook = store.findRecord('isbn', book.get('isbn'));
+                if (storeBook) {
+                    storeBook.set("author", book.get("author"));
+                    storeBook.set("description", book.get("description"));
+                    storeBook.set("thumb", book.get("thumb"));
+                }
+            }
+        }
+        this.getBooksList().refresh();
     },
     showLibrary: function (library) {
         var nav = this.getApplication().getController('Navigation');

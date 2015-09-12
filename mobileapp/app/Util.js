@@ -94,14 +94,16 @@ Ext.define("App.Util", {
         }
     },
     parseGoogleBook: function (data) {
-        return Ext.create('App.model.Book', {
-            name: data.volumeInfo.title,
-            id: data.id,
-            isbn: data.volumeInfo.industryIdentifiers[0].identifier,
-            description: data.volumeInfo.description,
-            thumb: data.volumeInfo.imageLinks.smallThumbnail,
-            author: data.volumeInfo.authors.join(', ')
-        });
+        if (data.volumeInfo.industryIdentifiers) {
+            return Ext.create('App.model.Book', {
+                name: data.volumeInfo.title,
+                //id: data.id,
+                isbn: data.volumeInfo.industryIdentifiers[0].identifier,
+                description: data.volumeInfo.description,
+                thumb: data.volumeInfo.imageLinks ? data.volumeInfo.imageLinks.smallThumbnail : null,
+                author: data.volumeInfo.authors.join(', ')
+            });
+        }
     },
     parseM2XBook: function (data) {
 

@@ -8,8 +8,6 @@
         cls: 'books-list',
 
         back: true,
-        layout: { type: 'fit' },
-        scrollable: true,
         itemTpl: [
             '<div class="clearfix book-wrap">',
                 '<tpl if="thumb">',
@@ -18,12 +16,10 @@
                 '<div class="book-detail">',
                     '<p>{name}</p>',
                     '<p>{author}</p>',
+                    '<p>{description}</p>',
                     '<p>{isbn}</p>',
                 '</div>',
             '</div>'
         ]
-    },
-    initialize: function () {
-        var me = 'test';
     }
 });

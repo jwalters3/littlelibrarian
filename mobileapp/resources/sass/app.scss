@@ -1,0 +1,193 @@
+// The following two lines import the default Sencha Touch theme. If you are building
+// a new theme, remove them and the add your own CSS on top of the base CSS (which
+// is already included in your app.json file).
+
+@import 'sencha-touch/base/';
+//@import 'sencha-touch/default/all';
+
+
+@import 'sencha-touch/flat';
+
+
+$button-color: #748A64;// #111;
+$toolbar-background-color: #748A64;// #2c3e50;
+$foreground-color: #34495e;
+
+$background-color: #fff;
+
+$inactive-color: #666 !default;
+
+$dialog-color: #1F1F1F;
+
+$list-bg-color: #fff;
+//$list-active-color:#77AECF;
+$list-active-bg-color: #77AECF;
+
+$field-background-color: #fff !default;
+$field-border-color: #eee !default;
+$field-color: #34495e !default;
+$field-placeholder-color: #7A7A7A !default;
+$field-focus-background-color: #fff !default;
+$field-focus-border-color: #748A64;
+$field-disabled-background-color: #EAEAEA !default;
+$field-disabled-border-color: #D9D9D9 !default;
+$field-disabled-color: #9F9F9F !default;
+$field-disabled-placeholder-color: #BDBDBD !default;
+
+$form-slider-background-color: #dbdbdb !default;
+$form-slider-value-background-color: #16a085 !default;
+$form-slider-thumb-background-color: #16a085 !default;
+$form-slider-disabled-background-color: #DBDBDB !default;
+$form-slider-disabled-value-background-color: #BABABA !default;
+$form-slider-disabled-thumb-background-color: #A0A0A0 !default;
+
+$form-toggle-background-color: #dbdbdb !default;
+$form-toggle-border-color: #16a085 !default;
+$form-toggle-thumb-background-color: #A3C8DF !default;
+$form-toggle-disabled-background-color: #E0E0E0 !default;
+$form-toggle-disabled-border-color: #CCCCCC !default;
+$form-toggle-disabled-thumb-background-color: #A6A6A6 !default;
+
+
+$form-slider-height: 11px !default;
+
+$alert-color: red !default;
+$confirm-color: #92cf00 !default; // Green
+
+$confirm-button-color: #92cf00;
+
+
+$font-size-extra-large: 1.5em;
+$font-size-medium: 1em;
+$font-size-medium-large: 1.1em;
+$font-size-large: 1.2em !default;
+$font-size-normal: 1em;
+$font-size-small: .8em;
+
+@import 'sencha-touch/flat/all';
+
+@import 'modules/overrides';
+@import 'modules/loadmask';
+@import 'modules/flatoverride';
+
+
+@mixin custom-icon($name, $font-family: false) {
+    .icon-#{$name}{
+        $character: icon-character-for-name($name);
+
+        &:before {
+            font-style: normal;
+            text-align: center;
+
+            @if $font-family {
+                font-family: $font-family;
+            } @else{
+                font-family: 'Pictos' !important;
+            }
+
+            @if $character {
+                content: "#{$character}";
+            } @else {
+                content: "#{$name}";
+            }
+        }
+    }
+}
+
+.logo {
+      background-image:  url('../images/logo.png'); 
+      height: 90px;
+      width: 104px;
+      position:relative;
+      top: -20px;
+  }
+
+
+
+.x-button-label {
+    font-size: 18px;
+}
+.x-button-back:before {    
+        margin-top: -5px;
+        font-size:22px;
+    }
+
+.disclaimer {
+    text-align: center;
+    padding: 10px;
+}
+.disclaimer-btn {
+    margin: 0 auto;
+    width: 50%;
+    margin-bottom: 20px;
+}
+.x-fullscreen {
+   // z-index: 999;
+}
+
+.x-badge {
+  font-size: 9pt;
+}
+.x-button .x-button-icon.settings:before {
+    font-size: 28px;
+}
+
+.gp-eye {
+
+    .x-field-input .x-clear-icon {
+        background: none;
+    }
+
+    .x-field-input .x-clear-icon:before {
+        position: absolute;
+        top: 5px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        color: #748A64;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: center;
+        content: 'E';        
+        font-family: "Pictos";
+    }
+
+ 
+
+}
+// Custom code goes here..
+
+
+.x-form-fieldset {
+	border-color: #eee;
+}
+
+.nobackground .x-button {
+	background:0;
+}
+
+
+.libraryinfo {
+    .title {
+	    font-weight: bold;
+    }
+	text-align: center;    
+}
+
+
+
+
+.error {
+    .errormessage {
+        color: red;
+    }
+    .title {
+        font-weight: bold;
+        margin: 10px 0px;
+    }
+
+}
+.val {
+    color: red;
+    display: inline;
+}

@@ -1,0 +1,64 @@
+﻿
+
+.x-button {
+    padding: .6em;
+    @include border-radius(0px);
+}
+
+.x-toolbar-dark .x-button.x-button-back:before {
+    background: none;  
+}
+
+.x-title {
+    text-align:center;
+}
+
+// button labels shouldnt be lowercase
+.x-button-label {    
+    text-transform: none;
+}
+
+// adjust color of checkboxes
+.x-input-checkbox:checked ~ .x-field-mask:after {
+    color: #748A64;
+}
+.x-input-checkbox ~ .x-field-mask:before {
+    background-color: #FFF;
+}
+
+// adjust color of radiobutton
+.x-input-radio:checked ~ .x-field-mask:after {
+    background: #77aecf;
+}
+
+// center buttons on message box
+.x-msgbox .x-msgbox-buttons .x-toolbar-inner {
+  -webkit-box-pack: center !important;
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+}
+.x-msgbox-text {
+    text-align: center;
+}
+
+
+// put border around form fields 
+.x-field-text .x-component-outer .x-input-el, .x-field-number .x-component-outer .x-input-el, .x-field-select .x-component-outer .x-input-el {
+    border:2px solid #ccc;
+}
+.x-field-search .x-component-outer .x-input-el {
+    border:2px solid #fff;
+}
+.x-field-textarea .x-component-outer .x-input-el {
+    border:2px solid #ccc;
+}
+
+
+.x-list .x-list-item.x-item-selected .x-dock-horizontal, .x-list .x-list-item.x-item-selected.x-list-item-tpl {
+  background-color: #77aecf;
+}
+
+.x-picker-slot .x-dataview-item.x-item-selected {  
+  background: #748A64;
+  border-color: #748A64;
+}

@@ -1,0 +1,104 @@
+﻿
+.x-button-normal .x-button-icon {
+    top: -1px;
+}
+
+.noborder.x-button-normal.x-button {
+    border-radius: 0 !important;
+    -webkit-border-radius: 0;  
+    background-color: #748A64;
+    border: 0px;
+    background-image: none; 
+}
+
+.noborder .x-button {
+    margin: 6px 0.5em;
+} 
+
+
+/* Make toolbar and back button look like an arrow (like iOS) */
+.x-toolbar-dark {
+
+    background-image: none;
+    .x-title {
+        text-shadow:none;
+    }
+
+    .x-button .x-button-label {
+        padding-top: 1px;
+        margin-left: -3px;
+    }
+    
+    .x-button.x-button-back:after {
+        background-color: #748A64;
+        background-image: none;
+        left: -10px;
+        -webkit-mask-size: 20px 100%;
+    }
+
+    .x-button.x-button-back {
+        background-color: #748A64;
+        border: 1px solid #748A64;
+        border-top-color: #748A64;
+        background-image: none;
+
+        &:before {
+            background: #fff;
+            -webkit-mask-size: 20px 100%;
+        }
+     }
+}
+
+
+
+
+/* Make Toast message easier to see */    
+.x-center > .x-toast {
+    background: #748A64;
+    position: absolute !important;
+    top: 60%;
+    min-width: 95%;
+    border-radius: 4px;
+    padding: 3px;
+    box-shadow: 5px 5px 5px black;
+}
+
+.x-toast .x-toast-text {
+  color: #fff;
+  line-height: 40px;
+  vertical-align: middle;
+}
+
+.x-button {
+    padding: .1em .6em .4em .6em;
+}
+
+.x-msgbox-text {
+        a {color: #fff;}
+}
+
+
+/* 2.2 includes a right-arrow "[" icon which doesn't match the style we like */
+.x-list {
+    .x-list-disclosure {
+        border:0;
+    }
+    .x-list-disclosure:before {
+    	content: none; 
+    }
+}
+
+.x-list-disclosure {
+    width: 10px  !important;    
+    position: absolute !important;
+    top: 25%  !important;
+    border:0;
+    -webkit-mask:none  !important;
+    background-color: transparent  !important;
+    background-image: theme_image('gp', "disclosure_gray.png") !important;
+	background-repeat: no-repeat;
+	background-size: 10px 14px !important;
+}
+
+
+

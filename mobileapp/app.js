@@ -42,8 +42,10 @@ Ext.application({
         'App.Api',
         'Ext.Toast',
         'App.override.LoadMask',
-        'App.override.Sheet'
-
+        'App.override.Sheet',
+        'App.view.LibraryDetail',
+        'App.view.LibraryTabs',
+        'App.view.LibraryBooks'
     ],
 
     controllers:[

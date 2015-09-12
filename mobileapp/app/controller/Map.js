@@ -45,12 +45,12 @@ Ext.define('App.controller.Map', {
         }
     },
     libraryTpl: [
-        '<div class="libraryinfo">',
+        '<div class="libraryinfo" style="position:relative;" >',
             '{Library_Name__c}<br/>',
             '{Street__c}<br/>',
             '{City__c}, {State_Province_Region__c} {Postal_Zip_Code__c}<br/>',
-            '<br/>{Library_Story__c}',
-            //'<tpl if="LastAuditedBy != null"><br/><br/>Last Audit: {LastAuditDate:date("F j, Y")}<br/>By {LastAuditedBy}<br/></tpl>',
+            '<br/>',
+            '<tpl if="attachment1""><img style="width:50%;" src="http://littlefreelibrary.force.com/servlet/servlet.FileDownload?file={attachment1}" /></tpl>',
          '</div>'
     ],
 
@@ -60,10 +60,11 @@ Ext.define('App.controller.Map', {
     },
 
     onBookButtonTap: function () {      
+        var nav = this.getController('Navigation');
         this.libraryPanel.hide();
-        // Call Web service to get books
-       
-
+        nav.push(Ext.create('App.view.LibraryTabs', {
+            record: this.selectedLibrary
+        }));
     },
    
     showLibrary: function (marker, pos) {
@@ -95,7 +96,7 @@ Ext.define('App.controller.Map', {
                     action: 'seebooks',
                     align: 'bottom',
                     height: '60',
-                    text: 'See Books'
+                    text: 'Details'
                 }]
             });
             this.libraryPanel.on('hide', function () {
@@ -276,6 +277,11 @@ Ext.define('App.controller.Map', {
         var gMap = mapPanel.getMap();
         for (i = 0; i < records.length; i++) {
             // addpoints
+            for (var prop in records[i]) {
+                if (prop.substr(0, 10) == 'attachment') {
+                    records[i].library[prop] = records[i][prop];
+                }
+            }
             var s = records[i].library;
             
             var marker = new google.maps.Marker({

@@ -9,7 +9,7 @@
             },
             booksList: {
                 xtype: 'librarybooks',
-                selector: 'librarybooks'
+                selector: 'librarybooks[action="library"]'
             }
         },
         control: {
@@ -43,16 +43,10 @@
     onBooksLoaded: function (response) {
         var devices = response.devices;
         var store = Ext.getStore("Book");
+        store.removeAll();
         for (i = 0; i < devices.length; i++) {
 
-            var book = Ext.create('App.model.Book', {
-                name: devices[i].name,
-                id: devices[i].id,
-                isbn: devices[i].serial,
-                latitude: devices[i].location.latitude,
-                longitude: devices[i].location.longitude,
-                status: devices[i].tags[0]
-            });
+            var book = Util.parseM2XBook(devices[i])
             store.add(book);
         }
         console.log(store);

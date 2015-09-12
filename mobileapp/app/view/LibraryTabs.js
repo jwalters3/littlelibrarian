@@ -12,7 +12,8 @@
             xtype: 'librarydetail',
             data: this.config.record
         }, {
-            xtype: 'librarybooks'
+            xtype: 'librarybooks',
+            action: 'library'
         }]);
     }
 });

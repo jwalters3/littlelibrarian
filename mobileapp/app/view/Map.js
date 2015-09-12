@@ -19,13 +19,23 @@
         me.callParent();
 
         this.add([{
+            xtype: 'textfield',
+            top: 20,
+            left: '10%',
+            width: '80%',
+            //hidden: true,
+            placeHolder: 'Search for a book...'
+        }, {
             xtype: 'map',
             mapOptions: {
                 center: new google.maps.LatLng(Util.getValue('latitude', 38.909027), Util.getValue('longitute', -77.037165))
             }
         }, {
             xtype: 'toolbar',
-            docked: 'bottom',
+            //docked: 'bottom',
+            bottom: 34,
+            right: 6,
+            style: 'border-radius:3px;',
             items: [
             {
                 xtype: 'spacer'

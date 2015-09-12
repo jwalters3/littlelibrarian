@@ -94,6 +94,16 @@ $font-size-small: .8em;
     }
 }
 
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
 .logo {
       background-image:  url('../images/logo.png'); 
       height: 90px;
@@ -195,4 +205,17 @@ $font-size-small: .8em;
 .val {
     color: red;
     display: inline;
+}
+
+.books-list {
+    .book-wrap {
+
+    }
+    .book-thumb {
+        float: left;
+        margin-right: 10px;
+    }
+    .book-detail {
+        padding: 5px;
+    }
 }

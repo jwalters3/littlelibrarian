@@ -4,6 +4,8 @@
         fields: [
             'id',
             'name',
+            'description',
+            'thumb',
             'latitude',
             'longitude',
             'isbn',

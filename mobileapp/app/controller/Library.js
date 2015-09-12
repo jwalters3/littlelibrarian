@@ -9,12 +9,12 @@
             },
             booksList: {
                 xtype: 'librarybooks',
-                selector: 'libararybooks'
+                selector: 'librarybooks[action="library"]'
             }
         },
         control: {
             booksList: {
-                show: 'onBooksShow'
+                activate: 'onBooksShow'
             }
             //map: {
             //    centerchange: 'onMapPan',
@@ -35,28 +35,25 @@
     },
 
     onBooksShow: function () {
-        //App.api.getBooksByLatLnglat, lng, successCallback, failureCallback, scope)
+        var library = this.library;
+        //this.getBooksList().setLoading();
+        App.Api.getBooksByLatLng(library.Library_Geolocation__c.latitude, library.Library_Geolocation__c.longitude, this.onBooksLoaded, Ext.emptyFn, this);
     },
 
     onBooksLoaded: function (response) {
         var devices = response.devices;
         var store = Ext.getStore("Book");
+        store.removeAll();
         for (i = 0; i < devices.length; i++) {
 
-            var book = Ext.create('App.model.Book', {
-                name: devices[i].name,
-                id: devices[i].id,
-                isbn: devices[i].serial,
-                latitude: devices[i].location.latitude,
-                longitude: devices[i].location.longitude,
-                status: devices[i].tags[0]
-            });
+            var book = Util.parseM2XBook(devices[i])
             store.add(book);
         }
         console.log(store);
     },
     showLibrary: function (library) {
-        var nav = this.getController('Navigation');
+        var nav = this.getApplication().getController('Navigation');
+        this.library = library;
         nav.push(Ext.create('App.view.LibraryTabs', {
             record: library
         }));

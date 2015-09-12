@@ -9,6 +9,7 @@ Ext.define("App.Api", {
     ],
 
     apiKey: 'f8217d70e0640dacbcf3ad79022ea058',
+    booksApiKey: 'AIzaSyAeHxBXKSU2iAQf4kUiI-PYo3ZhMb-_bpM',
 
     request: function (options, successCallback, failureCallback, networkFailureCallback) {
         //var baseApiUri = this.baseUri();
@@ -128,7 +129,9 @@ Ext.define("App.Api", {
         this._get(url, successCallback, failureCallback, scope, options);
     },
 
-
+    doGBooks: function (method, url, successCallback, failureCallback, scope) {
+        this['_' + method](url + '&key=' + this.booksApiKey, successCallback, failureCallback, scope);
+    },
 
     getBooksByLatLng: function (lat, lng, successCallback, failureCallback, scope) {
         this.doM2XGet('https://api-m2x.att.com/v2/devices/search?tags=Check%20In&latitude=' + lat + '&longitude=' + lng + '&distance=0.5&distance_unit=mi', successCallback, failureCallback, scope);
@@ -139,7 +142,11 @@ Ext.define("App.Api", {
 
     },
 
-    updateBookLocation: function (deviceId, lat, lng, successCallback, failureCallback, scope) {
+    queryBooks: function(q, success, failure, scope) {
+        this.doGBooks('get', 'https://www.googleapis.com/books/v1/volumes?q=' + encodeURIComponent(q), success, failure, scope)
+    },
+
+    updateBookLocation: function (deviceId, name, lat, lng, successCallback, failureCallback, scope) {
         var postData = { "name": name, "latitude": lat, "longitude": lng};// "elevation": 0 };
         this.doM2X('https://api-m2x.att.com/v2/devices/' + deviceId + '/location', postData, successCallback, failureCallback, scope);
         

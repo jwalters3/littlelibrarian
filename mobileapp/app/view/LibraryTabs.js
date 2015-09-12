@@ -3,9 +3,6 @@
     xtype: 'librarytabs',
 
     config: {
-        layout: {
-            type: 'fit'
-        },
         scrollable: null,
         back: true,
     },
@@ -15,7 +12,8 @@
             xtype: 'librarydetail',
             data: this.config.record
         }, {
-            xtype: 'librarybooks'
+            xtype: 'librarybooks',
+            action: 'library'
         }]);
     }
 });

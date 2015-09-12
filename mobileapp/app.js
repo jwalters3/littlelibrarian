@@ -49,6 +49,7 @@ Ext.application({
         'Map',
         'Cordova',
         'Navigation',
+        'Search',
         'Library'
     ],
 

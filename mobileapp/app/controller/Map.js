@@ -45,12 +45,13 @@ Ext.define('App.controller.Map', {
         }
     },
     libraryTpl: [
-        '<div class="libraryinfo" style="position:relative;" >',
-            '{Library_Name__c}<br/>',
-            '{Street__c}<br/>',
-            '{City__c}, {State_Province_Region__c} {Postal_Zip_Code__c}<br/>',
-            '<br/>',
-            '<tpl if="attachment1""><img style="width:50%;" src="http://littlefreelibrary.force.com/servlet/servlet.FileDownload?file={attachment1}" /></tpl>',
+        '<div class="libraryinfo">',
+            '<p>{Library_Name__c}</p>',
+            '<p>{Street__c}</p>',
+            '<p>{City__c}, {State_Province_Region__c} {Postal_Zip_Code__c}</p>',
+            '<div>',
+                '{[values.images.length ? "<img style=\'width:50%;\' src=\'http://littlefreelibrary.force.com/servlet/servlet.FileDownload?file=" + values.images[0] + "\' />" : "" ]}',
+            '</div>',
          '</div>'
     ],
 
@@ -61,7 +62,7 @@ Ext.define('App.controller.Map', {
 
     onBookButtonTap: function () {      
         this.libraryPanel.hide();
-        this.getController('Library').showLibrary(this.selectedLibrary);
+        this.getApplication().getController('Library').showLibrary(this.selectedLibrary);
         this.selectedLibrary = null;
     },
     onBooksLoaded:function(response) {
@@ -90,7 +91,7 @@ Ext.define('App.controller.Map', {
         if (!this.libraryPanel) {
             this.libraryPanel = Ext.create('Ext.Sheet', {           
                 centered: true,
-                height: 240,
+                //height: 240,
                 modal: true,
                 layout: {
                     type: 'auto',
@@ -101,7 +102,7 @@ Ext.define('App.controller.Map', {
                 padding: 10,
                 items: [{ itemId: 'libraryPanel',
                     xtype: 'panel',
-                    html: ''
+                    tpl: this.libraryTpl
                 }, {
                     xtype:'spacer',
                     height: 20
@@ -121,7 +122,7 @@ Ext.define('App.controller.Map', {
             this.libraryTpl = new Ext.XTemplate(this.libraryTpl);
         }
         this.selectedLibrary = marker.record;
-        this.libraryPanel.down('#libraryPanel').setHtml(this.libraryTpl.apply(marker.record));
+        this.libraryPanel.down('#libraryPanel').setData(marker.record);
         this.libraryPanel.show();
 
     },
@@ -291,13 +292,16 @@ Ext.define('App.controller.Map', {
         var mapPanel = me.getMap(); // down('map');
         var gMap = mapPanel.getMap();
         for (i = 0; i < records.length; i++) {
-            // addpoints
-            for (var prop in records[i]) {
+            var s = records[i].library,
+                attachments = [], prop;
+
+            for (prop in records[i]) {
+                
                 if (prop.substr(0, 10) == 'attachment') {
-                    records[i].library[prop] = records[i][prop];
+                    attachments.push(records[i][prop]);
                 }
             }
-            var s = records[i].library;
+            s.images = attachments;
             
             var marker = new google.maps.Marker({
                 map: gMap,

@@ -4,13 +4,21 @@
 
     config: {
         title: 'Book List',
-        store: 'bookstore',
+        store: 'Book',
 
         back: true,
         layout: { type: 'fit' },
         scrollable: true,
         itemTpl: [
-            '<div>{#]</div>'
+            '<div>',
+                '{id}<br/>',
+                '{name}<br/>',
+                '{latitude}<br/>',
+                '{longitude}<br/>',
+                '{isbn}<br/>',
+                '{author}<br/>',
+                '{status}<br/>',
+            '</div>'
         ]
     }
 });

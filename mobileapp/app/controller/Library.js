@@ -9,12 +9,12 @@
             },
             booksList: {
                 xtype: 'librarybooks',
-                selector: 'libararybooks'
+                selector: 'librarybooks'
             }
         },
         control: {
             booksList: {
-                show: 'onBooksShow'
+                activate: 'onBooksShow'
             }
             //map: {
             //    centerchange: 'onMapPan',
@@ -35,7 +35,9 @@
     },
 
     onBooksShow: function () {
-        //App.api.getBooksByLatLnglat, lng, successCallback, failureCallback, scope)
+        var library = this.library;
+        //this.getBooksList().setLoading();
+        App.Api.getBooksByLatLng(library.Library_Geolocation__c.latitude, library.Library_Geolocation__c.longitude, this.onBooksLoaded, Ext.emptyFn, this);
     },
 
     onBooksLoaded: function (response) {
@@ -56,7 +58,8 @@
         console.log(store);
     },
     showLibrary: function (library) {
-        var nav = this.getController('Navigation');
+        var nav = this.getApplication().getController('Navigation');
+        this.library = library;
         nav.push(Ext.create('App.view.LibraryTabs', {
             record: library
         }));

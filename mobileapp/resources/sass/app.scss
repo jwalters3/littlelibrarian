@@ -168,10 +168,15 @@ $font-size-small: .8em;
 
 
 .libraryinfo {
+	text-align: center;    
+    
+    p,div {
+        padding: 5px;
+    }
+
     .title {
 	    font-weight: bold;
     }
-	text-align: center;    
 }
 
 

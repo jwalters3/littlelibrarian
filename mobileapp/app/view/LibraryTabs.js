@@ -3,9 +3,6 @@
     xtype: 'librarytabs',
 
     config: {
-        layout: {
-            type: 'fit'
-        },
         scrollable: null,
         back: true,
     },

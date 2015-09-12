@@ -8,6 +8,7 @@ Ext.define("App.Api", {
       'Ext.device.Connection', 'Ext.Ajax'
     ],
 
+    apiKey: 'f8217d70e0640dacbcf3ad79022ea058',
 
     request: function (options, successCallback, failureCallback, networkFailureCallback) {
         //var baseApiUri = this.baseUri();
@@ -18,11 +19,13 @@ Ext.define("App.Api", {
         Ext.applyIf(options, {
             dataType: 'json'
         });
-
+        var headers = {};
+        if (options.headers) {
+            headers = options.headers;
+        }
         Ext.apply(options, {
             timeout: 30000,
-            headers: {
-            },
+            headers: headers,
             success: function (xhr, options) {
                 var response = xhr.responseText;
                 if (options.dataType == "json" && response != "") {
@@ -46,7 +49,7 @@ Ext.define("App.Api", {
                     failureCallback.call(options.scope, xhr, options);
                 }
             },
-            disableCaching: true
+            disableCaching: false
         });
 
         var offline = !Ext.device.Connection.isOnline();
@@ -80,15 +83,23 @@ Ext.define("App.Api", {
         }, options), successCallback, errorCallback);
     },
 
-    _put: function (rest, postData, successCallback, errorCallback, scope) {
-        this.request({
+    _put: function (rest, postData, successCallback, errorCallback, scope, options) {
+
+        this.request(Ext.apply({}, {
             rest: rest,
             method: 'PUT',
             scope: scope,
             jsonData: postData
-        },
-        successCallback,
-        errorCallback);
+        }, options), successCallback, errorCallback);
+
+        //this.request({
+        //    rest: rest,
+        //    method: 'PUT',
+        //    scope: scope,
+        //    jsonData: postData
+        //},
+        //successCallback,
+        //errorCallback);
     },
 
     _delete: function (rest, postData, successCallback, errorCallback, scope) {
@@ -105,6 +116,56 @@ Ext.define("App.Api", {
             return true;
         }
     },
+
+    
+    doM2X: function (url, postData, successCallback, failureCallback, scope) {        
+        var options = { headers: { "X-M2X-KEY": this.apiKey } };
+        this._put(url, postData, successCallback, failureCallback, scope, options);
+    },
+
+    doM2XGet: function (url, successCallback, failureCallback, scope) {
+        var options = { headers: { "X-M2X-KEY": this.apiKey } };
+        this._get(url, successCallback, failureCallback, scope, options);
+    },
+
+
+
+    getBooksByLatLng: function (lat, lng, successCallback, failureCallback, scope) {
+        this.doM2XGet('https://api-m2x.att.com/v2/devices/search?tags=Check%20In&latitude=' + lat + '&longitude=' + lng + '&distance=0.5&distance_unit=mi', successCallback, failureCallback, scope);
+    },
+
+    searchBooks:function(isbn, successCallback, failureCallback, scope) {
+        this.doM2XGet('https://api-m2x.att.com/v2/devices/search?tags=Check%20In&serial=' + isbn, successCallback, failureCallback, scope);
+
+    },
+
+    updateBookLocation: function (deviceId, name, lat, lng, successCallback, failureCallback, scope) {
+        var postData = { "name": name, "latitude": lat, "longitude": lng};// "elevation": 0 };
+        this.doM2X('https://api-m2x.att.com/v2/devices/' + deviceId + '/location', postData, successCallback, failureCallback, scope);
+        
+    },
+
+    updateDevice: function (deviceId, name, tags, successCallback, failureCallback, scope) {
+        var postData = { "name": name, "tags": tags, "visibility": "private" };
+        this.doM2X('https://api-m2x.att.com/v2/devices/' + deviceId, postData, successCallback, failureCallback, scope);
+    },
+
+    checkIn:function(deviceId, name, successCallback, failureCallback,scope) {        
+        var postData = { "value": 0 };
+        this.doM2X('https://api-m2x.att.com/v2/devices/' + deviceId + '/streams/status/value', postData, successCallback, failureCallback, scope);
+
+        this.updateDevice(deviceId, name, 'Check In', null, null, null);
+
+    },
+
+    checkOut: function (deviceId, name, successCallback, failureCallback,scope) {
+        var url = 'http://api-m2x.att.com/v2/devices/${DEVICE}/streams'
+        var postData = { "value": 1 };
+        this.doM2X('https://api-m2x.att.com/v2/devices/' + deviceId + '/streams/status/value', postData, successCallback, failureCallback, scope);
+        this.updateDevice(deviceId, name, 'Check Out', null, null, null);
+    },
+
+    
 
     getLibraries: function (lat, lng, successCallback, failureCallback, scope) {
         var body = {

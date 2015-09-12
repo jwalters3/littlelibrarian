@@ -66,7 +66,24 @@ Ext.define('App.controller.Map', {
             record: this.selectedLibrary
         }));
     },
-   
+    onBooksLoaded:function(response) {
+        var devices = response.devices;
+        var store = Ext.getStore("Book");
+        for (i = 0; i < devices.length; i++) {
+
+            var book = Ext.create('App.model.Book', {
+                name: devices[i].name,
+                id: devices[i].id,
+                isbn: devices[i].serial,
+                latitude: devices[i].location.latitude,
+                longitude: devices[i].location.longitude,
+                status: devices[i].tags[0]               
+            });
+            store.add(book);
+        }
+        console.log(store);
+    },
+
     showLibrary: function (marker, pos) {
 
         var lat = pos.latLng.lat(); // lat of click

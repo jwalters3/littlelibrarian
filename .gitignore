@@ -1,3 +1,8 @@
 mobileapp/build
 mobileapp/resources/sass/.sass-cache
 mobileapp/bootstrap.*
+mobileapp/cordova/www/*
+mobileapp/cordova/platforms/android/assets/www/*
+mobileapp/cordova/platforms/android/build
+mobileapp/cordova/platforms/android/CordovaLib/build
+

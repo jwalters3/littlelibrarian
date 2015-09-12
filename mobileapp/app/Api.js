@@ -186,8 +186,16 @@ Ext.define("App.Api", {
             "tid": 2,
             "ctx": { "csrf": "VmpFPSxNakF4TlMweE1DMHdPRlF3TWpvME1UbzBNeTR3TVRCYSxGWHdFLFpUTmhZelkw", "vid": "066d00000027Meh", "ns": "", "ver": 29 }
         };
-        this._post('http://littlefreelibrary.force.com/apexremote', body, successCallback, failureCallback, scope, {dataType:'json'});
+        if (Ext.browser.is.PhoneGap) {
+            // LFL Salesforce call doesn't' work on the device :-(
+            Ext.Function.defer(function (successCallback, failureCallback, scope) {
+                this._get('resources/data.json', successCallback, failureCallback, scope);
+            }, 2000, this, [successCallback, failureCallback, scope]);
 
+        }
+        else {
+            this._post('http://littlefreelibrary.force.com/apexremote', body, successCallback, failureCallback, scope, { dataType: 'json' });
+        }
     }
    
    

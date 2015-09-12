@@ -15,6 +15,16 @@ Ext.define('App.view.Navigation', {
                 itemId: 'settings',
                 align: 'right',
                 hidden: true
+            },
+            {
+                xtype: 'button',
+                itemId: 'checkin',
+                align: 'right',
+                iconCls: 'news',
+                //text: 'My Books',
+                badgeText: '1',
+                action: 'checkin',
+                hidden: true
             }
            ]
         },

@@ -17,7 +17,7 @@
                 '<div style="text-align:center;">',
                 '<h3 style="margin-bottom:5px;">{name}</h2>',
                 '<p>{author}</p>',
-                '<div><img src="{image}" /></div>',
+                '<div style="padding-top:10px"><img src="{thumb}" /></div>',
                 '</div>'
             ]
         }, {

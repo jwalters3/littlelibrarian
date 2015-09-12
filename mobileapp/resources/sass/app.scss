@@ -94,6 +94,14 @@ $font-size-small: .8em;
     }
 }
 
+@include icon('news');
+
+.x-badge {
+    background-color: tan;
+    padding: 0;
+    min-width: 0;
+}
+
 .clearfix:before,
 .clearfix:after {
   content: "";
@@ -215,7 +223,13 @@ $font-size-small: .8em;
         float: left;
         margin-right: 10px;
     }
+    .book-title {
+        padding: 5px;
+        line-height: 24px;
+    }
     .book-detail {
         padding: 5px;
+        font-size: 12px;
+        line-height: 18px;
     }
 }

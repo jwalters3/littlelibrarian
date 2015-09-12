@@ -1,5 +1,6 @@
 ﻿Ext.define('App.view.LibraryDetail', {
     extend: 'Ext.Panel',
+    require: ['Ext.carousel.Carousel'],
     xtype: 'librarydetail',
 
     config: {

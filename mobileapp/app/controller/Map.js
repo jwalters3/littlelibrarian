@@ -19,7 +19,10 @@ Ext.define('App.controller.Map', {
             },           
             locateButton: {
                 selector: '[action="locate"]'
-            },            
+            },
+            checkedOutButton: {
+                selector: '[action="books"]'
+            },
             bookButton: {
                 selector: '[action="seebooks"]'
             }
@@ -57,9 +60,25 @@ Ext.define('App.controller.Map', {
 
   
     onNavChange: function (navview, view, e) {
-        
+        // Hide the settings button when you're not on the campaign screen        
+        //if (navview.down('#checkin')) {
+        //    navview.down('#checkin').setHidden(true);
+        //}
+        this.toggleCheckIn();
     },
 
+    toggleCheckIn: function () {
+
+        var store = Ext.getStore("CheckedOut");
+        var button = this.getNav().down("#checkin");
+        if (store.getCount() > 0) {
+            button.setHidden(false);
+            //button.setBadgeText(store.getCount());
+        } else {
+            button.setHidden(true);
+        }
+
+    },
     onBookButtonTap: function () {      
         this.libraryPanel.hide();
         this.getApplication().getController('Library').showLibrary(this.selectedLibrary);
@@ -240,7 +259,8 @@ Ext.define('App.controller.Map', {
         Util.setValue('zoom', zoomlevel);
     },
     onMapRender: function() {
-        this.locateUser();        
+        this.locateUser();
+        this.toggleCheckIn();
     },
     initMap: function () {
         var mapPanel = this.getMap(); // down('map');

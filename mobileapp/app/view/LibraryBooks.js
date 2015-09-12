@@ -13,11 +13,13 @@
                 '<tpl if="thumb">',
                     '<div class="book-thumb"><img src="{thumb}" /></div>',
                 '</tpl>',
-                '<div class="book-detail">',
-                    '<p>{name}</p>',
+                '<div class="book-title">',
+                    '<p><b>{name}</b></p>',
                     '<p>{author}</p>',
-                    '<p>{description}</p>',
-                    '<p>{isbn}</p>',
+                '</div>',
+                '<div class="book-detail">',
+                    '<p>{[Ext.String.ellipsis(values.description,250,false)]}</p>',
+                    '<p>ISBN:{isbn}</p>',
                 '</div>',
             '</div>'
         ]

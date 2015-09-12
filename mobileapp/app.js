@@ -70,7 +70,8 @@ Ext.application({
         ],
     stores:
         [
-           'Book'
+           'Book',
+           'CheckedOut'
         ],
 
     icon: {

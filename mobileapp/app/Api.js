@@ -160,7 +160,7 @@ Ext.define("App.Api", {
     checkIn:function(deviceId, name, lat, lng, successCallback, failureCallback,scope) {        
         var postData = { "value": 0 };
         this.updateDevice(deviceId, name, 'Check In', null, null, null);
-        this.updateBookLocation(deviceId, lat, lng, null, null, null);
+        this.updateBookLocation(deviceId, name, lat, lng, null, null, null);
         this.doM2X('https://api-m2x.att.com/v2/devices/' + deviceId + '/streams/status/value', postData, successCallback, failureCallback, scope);
 
     },
